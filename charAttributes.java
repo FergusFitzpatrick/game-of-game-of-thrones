@@ -7,9 +7,9 @@
 * And is written poorly so far.
 */
 public class charAttributes{
-	private String warriorNames;
-	private int power;
-	private double speed;
+	public String warriorNames;
+	public int power;
+	public double speed;
 	public int health;
 	public double damageDone;
 	public double damageDealt;

@@ -109,8 +109,8 @@ public class GOGOT{
 		while( Player1.alive == true){
 				System.out.println("Your Move: \n\t1. Strong Attack \n\t2. Fast Attack \n\t3. Dodge");
 				int input = scan.nextInt();
-				Attack(input);
-				opponentMove();
+				Attack(input, scan, Player1);
+				opponentMove(opponent, Player1);
 				break;
 		}
 	}
@@ -123,28 +123,50 @@ public class GOGOT{
 			}
 			return result;
 	}
-	public static int Attack(int input){
-		if ( input =1 ){
-			Player1.damageDealt = ((Player1.speed/2) * (Player1.power) + (Player1.stamina * Player1.skill))/ (Player.stamina*Player1.health);
+
+	//Need better points system. try multiply current system by 10 and get rid of decimal points.
+	public static double Attack(int input, Scanner scan, charAttributes Player1){
+		String move = "";
+		if ( input == 1 ){
+			Player1.damageDealt = ((Player1.speed/2) * (Player1.power) + (Player1.stamina * Player1.skill))/ (Player1.stamina*Player1.health);
+			move = "Strenght Attack";
 		}
-		else if ( input  = 2){
-			Player1.damageDealt = (Player1.speed * (Player1.power / 2) + (Player1.stamina * Player1.skill))/ (Player.stamina*Player1.health);
+		else if ( input  == 2){
+			Player1.damageDealt = (Player1.speed * (Player1.power / 2) + (Player1.stamina * Player1.skill))/ (Player1.stamina*Player1.health);
+			move = "Speed Attack";
 		}
-		else if (input =3){
+		else if (input == 3){
 			Player1.damageDealt = 0;
 			Player1.damageDone = 0;
+			move = "Dodge";
 		}
 		else{
 			System.out.println("Invalid input");
 			input = scan.nextInt();
-			Attack(input);
+			Attack(input, scan, Player1);
 		}
+		System.out.println("You chose to: "+ move+" - "+Player1.damageDealt+" HitPoints!");
 		return Player1.damageDealt;
 	}
-	public static int opponentMove(){
-		int moveNumber = Math.random() * 3 + 1;
-		if ( moveNumber =1 ){
 
+	//Need a better method for calling a random number between 1,2,3
+	public static double opponentMove(charAttributes opponent, charAttributes Player1){
+		double moveNumber = Math.random() * 3 + 1;
+		String move = "";
+		if ( moveNumber == 1.0 ){
+				opponent.damageDealt = ((opponent.speed/2) * (opponent.power) + (opponent.stamina * opponent.skill)) / (opponent.stamina * opponent.health);
+				move = "Strenght Attack";
 		}
+		else if( moveNumber == 2.0 ){
+			opponent.damageDealt = (opponent.speed * (opponent.power /2) + (opponent.stamina * opponent.skill)) / (opponent.stamina * opponent.health);
+			move = "Speed Attack";
+		}
+		else if( moveNumber == 3.0 ){
+			opponent.damageDealt = 0;
+			opponent.damageDone = 0;
+			move = "Dodge";
+		}
+		System.out.println(opponent.warriorNames+" chose to: "+ move+" = "+opponent.damageDealt+" HitPoints!");
+		return opponent.damageDealt;
 	}
 }
