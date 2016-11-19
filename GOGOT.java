@@ -107,7 +107,7 @@ public class GOGOT{
 		System.out.println(opponentName +" is your opponent! Fight To The Death!");
 
 		while( Player1.alive == true){
-				System.out.println("Your Move: \n\t1. Strong Attack \n\t2. Fast Attack \n\t3. Dodge");
+				System.out.println("Your Move: \n\t1. Power Attack \n\t2. Fast Attack \n\t3. Dodge");
 				int input = scan.nextInt();
 				Attack(input, scan, Player1);
 				opponentMove(opponent, Player1);
@@ -124,15 +124,15 @@ public class GOGOT{
 			return result;
 	}
 
-	//Need better points system. try multiply current system by 10 and get rid of decimal points.
+	//Need better points system. cast double to int for simpler game & then write code to update player variables.
 	public static double Attack(int input, Scanner scan, charAttributes Player1){
 		String move = "";
 		if ( input == 1 ){
-			Player1.damageDealt = ((Player1.speed/2) * (Player1.power) + (Player1.stamina * Player1.skill))/ (Player1.stamina*Player1.health);
-			move = "Strenght Attack";
+			Player1.damageDealt = 10*((Player1.speed/2) * (Player1.power) + (Player1.stamina * Player1.skill))/ (Player1.stamina*Player1.health);
+			move = "Power Attack";
 		}
 		else if ( input  == 2){
-			Player1.damageDealt = (Player1.speed * (Player1.power / 2) + (Player1.stamina * Player1.skill))/ (Player1.stamina*Player1.health);
+			Player1.damageDealt = 10*(Player1.speed * (Player1.power / 2) + (Player1.stamina * Player1.skill))/ (Player1.stamina*Player1.health);
 			move = "Speed Attack";
 		}
 		else if (input == 3){
@@ -145,23 +145,22 @@ public class GOGOT{
 			input = scan.nextInt();
 			Attack(input, scan, Player1);
 		}
-		System.out.println("You chose to: "+ move+" - "+Player1.damageDealt+" HitPoints!");
+		System.out.println("You chose to: "+ move+" = "+Player1.damageDealt+" HitPoints!");
 		return Player1.damageDealt;
 	}
 
-	//Need a better method for calling a random number between 1,2,3
 	public static double opponentMove(charAttributes opponent, charAttributes Player1){
-		double moveNumber = Math.random() * 3 + 1;
+		double moveNumber = Math.random() * 10;
 		String move = "";
-		if ( moveNumber == 1.0 ){
-				opponent.damageDealt = ((opponent.speed/2) * (opponent.power) + (opponent.stamina * opponent.skill)) / (opponent.stamina * opponent.health);
-				move = "Strenght Attack";
+		if ( moveNumber <= 3.3 ){
+			opponent.damageDealt = 10*((opponent.speed/2) * (opponent.power) + (opponent.stamina * opponent.skill)) / (opponent.stamina * opponent.health);
+			move = "Power Attack";
 		}
-		else if( moveNumber == 2.0 ){
-			opponent.damageDealt = (opponent.speed * (opponent.power /2) + (opponent.stamina * opponent.skill)) / (opponent.stamina * opponent.health);
+		else if( moveNumber >= 3.4 && moveNumber <= 6.7){
+			opponent.damageDealt = 10*(opponent.speed * (opponent.power /2) + (opponent.stamina * opponent.skill)) / (opponent.stamina * opponent.health);
 			move = "Speed Attack";
 		}
-		else if( moveNumber == 3.0 ){
+		else if( moveNumber >= 6.8 ){
 			opponent.damageDealt = 0;
 			opponent.damageDone = 0;
 			move = "Dodge";
